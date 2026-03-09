@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dvdyldx4e4tqi"]
+[gd_scene load_steps=16 format=3 uid="uid://dvdyldx4e4tqi"]
 
 [ext_resource type="Script" uid="uid://crcjlwrool7gx" path="res://scripts/Mob.cs" id="1_bsing"]
 
@@ -11,6 +11,9 @@ albedo_color = Color(0, 0.4745098, 0.3372549, 1)
 [sub_resource type="CylinderMesh" id="CylinderMesh_4are2"]
 material = SubResource("StandardMaterial3D_rlwmu")
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_4are2"]
+radius = 0.31835938
+
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bsing"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d4cuo"]
@@ -18,6 +21,8 @@ albedo_color = Color(1, 0.078431375, 0.1764706, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_71rcx"]
 material = SubResource("StandardMaterial3D_d4cuo")
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_71rcx"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xsfyf"]
 
@@ -27,7 +32,7 @@ length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("CharacterBody3D/Area3D/HeadColl:position")
+tracks/0/path = NodePath("CharacterBody3D/HeadColl:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -67,7 +72,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Area3D/HeadColl:position")
+tracks/1/path = NodePath("CharacterBody3D/HeadColl:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -123,7 +128,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("CharacterBody3D/Area3D/HeadColl:position")
+tracks/1/path = NodePath("CharacterBody3D/HeadColl:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -160,28 +165,36 @@ script = ExtResource("1_bsing")
 transform = Transform3D(1.989537, 0, 0, 0, 1, 0, 0, 0, 1.989537, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 0.7074143, 0, 0, 0, 1, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.915628, 0, 0, 0, 1, 0, 0.62712175, 0)
 shape = SubResource("CylinderShape3D_d4cuo")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
 [node name="Body" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(1.578222, 0, 0, 0, 0.13813996, 0, 0, 0, 1.578222, 0, 0, 0)
+transform = Transform3D(1.5782219, 0, 0, 0, 0.13813996, 0, 0, 0, 1.5782219, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4are2")
 
-[node name="Area3D2" type="Area3D" parent="CharacterBody3D"]
+[node name="Area3D" type="Area3D" parent="CharacterBody3D/Body"]
 
-[node name="BodyColl" type="CollisionShape3D" parent="CharacterBody3D/Area3D2"]
-transform = Transform3D(1.578222, 0, 0, 0, 0.13813996, 0, 0, 0, 1.578222, 0, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Body/Area3D"]
+transform = Transform3D(1.5782219, 0, 0, 0, 0.9727096, 0, 0, 0, 1.5782219, 0, 0, 0)
+shape = SubResource("CylinderShape3D_4are2")
+
+[node name="BodyColl" type="CollisionShape3D" parent="CharacterBody3D"]
+transform = Transform3D(1.5782219, 0, 0, 0, 0.13813996, 0, 0, 0, 1.5782219, 0, 0, 0)
 shape = SubResource("CylinderShape3D_bsing")
 
 [node name="Head" type="MeshInstance3D" parent="CharacterBody3D"]
 transform = Transform3D(1.2487074, 0, 0, 0, 0.16183798, 0, 0, 0, 1.2487074, 0, 0.21429865, 0)
 mesh = SubResource("CylinderMesh_71rcx")
 
-[node name="Area3D" type="Area3D" parent="CharacterBody3D"]
+[node name="Area3D" type="Area3D" parent="CharacterBody3D/Head"]
 
-[node name="HeadColl" type="CollisionShape3D" parent="CharacterBody3D/Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Head/Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1.0106856, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_71rcx")
+
+[node name="HeadColl" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1.2487074, 0, 0, 0, 0.16183798, 0, 0, 0, 1.2487074, 0, 0.21429865, 0)
 shape = SubResource("CylinderShape3D_xsfyf")
 
@@ -193,5 +206,5 @@ autoplay = "Moving"
 
 [connection signal="body_entered" from="Area3D" to="." method="OnPlayerEnterArea"]
 [connection signal="body_exited" from="Area3D" to="." method="OnPlayerExitArea"]
-[connection signal="body_entered" from="CharacterBody3D/Area3D2" to="." method="OnPlayerHit"]
-[connection signal="body_entered" from="CharacterBody3D/Area3D" to="." method="OnPlayerJumpOnHead"]
+[connection signal="body_entered" from="CharacterBody3D/Body/Area3D" to="." method="OnPlayerHit"]
+[connection signal="body_entered" from="CharacterBody3D/Head/Area3D" to="." method="OnPlayerJumpOnHead"]

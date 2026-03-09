@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ceq06roye5x66"]
+[gd_scene load_steps=7 format=3 uid="uid://ceq06roye5x66"]
 
 [ext_resource type="PackedScene" uid="uid://uav2c4yg5n5s" path="res://scenes/player_node.tscn" id="1_4xfga"]
 [ext_resource type="PackedScene" uid="uid://dvdyldx4e4tqi" path="res://scenes/mob.tscn" id="2_paxxb"]
+[ext_resource type="PackedScene" uid="uid://c2xkikr8u7xsg" path="res://scenes/audio_player.tscn" id="3_gldc4"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_paxxb"]
 albedo_color = Color(0.4862745, 0.5058824, 0.5019608, 0.92156863)
@@ -80,3 +81,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7928123, 0)
 
 [node name="Mob" parent="." instance=ExtResource("2_paxxb")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.7174516, 0.772038, 0)
+
+[node name="AudioPlayer" parent="." node_paths=PackedStringArray("player") instance=ExtResource("3_gldc4")]
+player = NodePath("../PlayerNode/Player")
+
+[editable path="PlayerNode"]

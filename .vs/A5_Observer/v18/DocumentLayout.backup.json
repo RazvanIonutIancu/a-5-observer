@@ -3,8 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|c:\\users\\zacku\\documents\\godot projects\\a-5-observer\\scenes\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|solutionrelative:scenes\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|c:\\users\\zacku\\documents\\godot projects\\a-5-observer\\scripts\\mob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|solutionrelative:scripts\\mob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +19,14 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Player.cs",
-              "DocumentMoniker": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scenes\\Player.cs",
-              "RelativeDocumentMoniker": "scenes\\Player.cs",
-              "ToolTip": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scenes\\Player.cs",
-              "RelativeToolTip": "scenes\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAkAAAAAAAAAA==",
+              "Title": "Mob.cs",
+              "DocumentMoniker": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scripts\\Mob.cs",
+              "RelativeDocumentMoniker": "scripts\\Mob.cs",
+              "ToolTip": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scripts\\Mob.cs",
+              "RelativeToolTip": "scripts\\Mob.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACsAAAAwAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-09T14:09:39.261Z",
+              "WhenOpened": "2026-03-09T15:10:29.994Z",
               "EditorCaption": ""
             }
           ]

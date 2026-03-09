@@ -3,6 +3,26 @@ using System;
 
 public partial class Player : CharacterBody3D
 {
+
+	// Delegates
+	public delegate void PlayerEvent();
+
+	public PlayerEvent onJump;
+	public PlayerEvent onHurt;
+
+
+
+
+
+
+	// ****************
+	//
+	//	PHYSICS
+	//
+	// ****************
+
+
+	// Other
 	public const float Speed = 5.0f;
 	public const float JumpVelocity = 5f;
 
@@ -20,6 +40,13 @@ public partial class Player : CharacterBody3D
 		if (Input.IsActionJustPressed("jump") && IsOnFloor())
 		{
 			velocity.Y = JumpVelocity;
+
+
+			// Notify observers
+			if(onJump != null)
+			{
+                onJump();
+			}
 		}
 
 		// Get the input direction and handle the movement/deceleration.
@@ -40,4 +67,28 @@ public partial class Player : CharacterBody3D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
