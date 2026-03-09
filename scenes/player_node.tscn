@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://uav2c4yg5n5s"]
 
-[ext_resource type="Script" uid="uid://b63nithh5cxdu" path="res://scenes/Player.cs" id="1_4m5hh"]
+[ext_resource type="Script" uid="uid://b63nithh5cxdu" path="res://scripts/Player.cs" id="1_4m5hh"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4m5hh"]
 albedo_color = Color(0.2, 0.16078432, 0.38039216, 1)
@@ -33,3 +33,8 @@ shape = SubResource("CapsuleShape3D_cvrci")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 0.74966073, 0.66182226, 0, -0.66182226, 0.74966073, 0, 5.206789, 5.7341976)
+
+[node name="HPText" type="Label3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4462352, 0)
+text = "3"
+font_size = 120

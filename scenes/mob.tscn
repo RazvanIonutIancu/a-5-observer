@@ -1,4 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvdyldx4e4tqi"]
+[gd_scene load_steps=14 format=3 uid="uid://dvdyldx4e4tqi"]
+
+[ext_resource type="Script" uid="uid://crcjlwrool7gx" path="res://scripts/Mob.cs" id="1_bsing"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_d4cuo"]
+radius = 1.9975586
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rlwmu"]
 albedo_color = Color(0, 0.4745098, 0.3372549, 1)
@@ -16,22 +21,177 @@ material = SubResource("StandardMaterial3D_d4cuo")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_xsfyf"]
 
+[sub_resource type="Animation" id="Animation_d4cuo"]
+resource_name = "Dead"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D/Area3D/HeadColl:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.041808642, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Head:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.041808642, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rlwmu"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Area3D/HeadColl:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.21429865, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody3D/Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.21429865, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4are2"]
+resource_name = "Moving"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_bsing"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CharacterBody3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CharacterBody3D/Area3D/HeadColl:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.21429865, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CharacterBody3D/Head:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.21429865, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d4cuo"]
+_data = {
+&"Dead": SubResource("Animation_d4cuo"),
+&"Idle": SubResource("Animation_rlwmu"),
+&"Moving": SubResource("Animation_4are2"),
+&"RESET": SubResource("Animation_bsing")
+}
+
 [node name="Mob" type="Node3D"]
+script = ExtResource("1_bsing")
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1.989537, 0, 0, 0, 1, 0, 0, 0, 1.989537, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 0.7074143, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("CylinderShape3D_d4cuo")
 
 [node name="CharacterBody3D" type="CharacterBody3D" parent="."]
 
 [node name="Body" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(0.795, 0, 0, 0, 0.062318366, 0, 0, 0, 0.795, 0, 0, 0)
+transform = Transform3D(1.578222, 0, 0, 0, 0.13813996, 0, 0, 0, 1.578222, 0, 0, 0)
 mesh = SubResource("CylinderMesh_4are2")
 
-[node name="BodyColl" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(0.795, 0, 0, 0, 0.062318366, 0, 0, 0, 0.795, 0, 0, 0)
+[node name="Area3D2" type="Area3D" parent="CharacterBody3D"]
+
+[node name="BodyColl" type="CollisionShape3D" parent="CharacterBody3D/Area3D2"]
+transform = Transform3D(1.578222, 0, 0, 0, 0.13813996, 0, 0, 0, 1.578222, 0, 0, 0)
 shape = SubResource("CylinderShape3D_bsing")
 
 [node name="Head" type="MeshInstance3D" parent="CharacterBody3D"]
-transform = Transform3D(0.645, 0, 0, 0, 0.035885543, 0, 0, 0, 0.645, 0, 0.093812004, 0)
+transform = Transform3D(1.2487074, 0, 0, 0, 0.16183798, 0, 0, 0, 1.2487074, 0, 0.21429865, 0)
 mesh = SubResource("CylinderMesh_71rcx")
 
-[node name="HeadColl" type="CollisionShape3D" parent="CharacterBody3D"]
-transform = Transform3D(0.645, 0, 0, 0, 0.035885543, 0, 0, 0, 0.645, 0, 0.093812004, 0)
+[node name="Area3D" type="Area3D" parent="CharacterBody3D"]
+
+[node name="HeadColl" type="CollisionShape3D" parent="CharacterBody3D/Area3D"]
+transform = Transform3D(1.2487074, 0, 0, 0, 0.16183798, 0, 0, 0, 1.2487074, 0, 0.21429865, 0)
 shape = SubResource("CylinderShape3D_xsfyf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_d4cuo")
+}
+autoplay = "Moving"
+
+[connection signal="body_entered" from="Area3D" to="." method="OnPlayerEnterArea"]
+[connection signal="body_exited" from="Area3D" to="." method="OnPlayerExitArea"]
+[connection signal="body_entered" from="CharacterBody3D/Area3D2" to="." method="OnPlayerHit"]
+[connection signal="body_entered" from="CharacterBody3D/Area3D" to="." method="OnPlayerJumpOnHead"]
