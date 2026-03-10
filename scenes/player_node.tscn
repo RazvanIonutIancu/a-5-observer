@@ -37,6 +37,5 @@ transform = Transform3D(1, 0, 0, 0, 0.74966073, 0.66182226, 0, -0.66182226, 0.74
 
 [node name="HPText" type="Label3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4462352, 0)
-text = "3"
 font_size = 120
 script = ExtResource("2_0upji")

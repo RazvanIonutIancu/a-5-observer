@@ -9,11 +9,12 @@ public partial class Player : CharacterBody3D
 
 	public PlayerEvent onJump;
 	public PlayerEvent onHurt;
+	public PlayerEvent onHpChange;
 
 
 
 	private int maxHP = 3;
-	private int currentHP;
+	public int currentHP;
 
 
 
@@ -21,23 +22,15 @@ public partial class Player : CharacterBody3D
 
     public override void _Ready()
     {
-		onHurt = TakeDamage;
+		onHurt += TakeDamage;
 
 
 		currentHP = maxHP;
+        if (onHpChange != null)
+        {
+            onHpChange();
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -56,6 +49,9 @@ public partial class Player : CharacterBody3D
 
 	public override void _PhysicsProcess(double delta)
 	{
+		GD.Print(currentHP.ToString());
+
+
 		Vector3 velocity = Velocity;
 
 		// Add the gravity.
@@ -113,7 +109,10 @@ public partial class Player : CharacterBody3D
 	{
 		currentHP -= 1;
 
-		// TODO end game if hp is 0
+		if (onHpChange != null)
+		{
+			onHpChange();
+        }
 
 
 	}

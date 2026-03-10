@@ -80,6 +80,8 @@ public partial class MobController : Node
 
         newMob.SpawnMob();
         newMob.Visible = true;
+        newMob.SetPhysicsProcess(true);
+        newMob.SetProcess(true);
         newMob.OnMobDeath += HandleMobDeath;
     }
 

@@ -7,11 +7,14 @@ public partial class Mob : Node3D
 {
     // Delegates and observer types
     public delegate void MobEvent(Mob mob);
+    public delegate void MobFlavourEvent();
 
-    public MobEvent OnIdle;
-    public MobEvent OnChase;
-    public MobEvent OnWait;
+
+    public MobFlavourEvent OnIdle;
+    public MobFlavourEvent OnChase;
+    public MobFlavourEvent OnWait;
     public MobEvent OnMobDeath;
+    public MobFlavourEvent OnMobFlavourDeath;
 
     public int mobPoolIndex;
 
@@ -24,7 +27,7 @@ public partial class Mob : Node3D
     private Timer deathTimer;
 
     private Player player;
-    //private CharacterBody3D mob;
+
 
 
     // NPC states
@@ -41,14 +44,11 @@ public partial class Mob : Node3D
     private bool playerIsInChaseArea;
     private bool isTouchingPlayer;
 
-    private MobMovementLogic mobMovement;
-
-
+    private float movementSpeed = 2.0f;
 
     public override void _Ready()
     {
         player = GetNode<Player>("/root/Map/PlayerNode/Player");
-        mobMovement = GetNode<MobMovementLogic>("CharacterBody3D");
     }
 
     // ***************************
@@ -88,6 +88,10 @@ public partial class Mob : Node3D
         playerIsInChaseArea = false;
         isTouchingPlayer = false;
         currentState = States.IDLE;
+        if (OnIdle != null)
+        {
+            OnIdle();
+        }
     }
 
     private bool CheckCollisionAtPoint(Vector3 point)
@@ -132,6 +136,10 @@ public partial class Mob : Node3D
                 {
                     SwitchState(States.WAIT);
                 }
+                else
+                {
+                    ChasePlayer(delta);
+                }
                 break;
             case States.WAIT:
                 if (chaseTimer.IsStopped())
@@ -158,7 +166,6 @@ public partial class Mob : Node3D
 
         }
 
-        GD.Print(mobMovement.chasingPlayer.ToString());
 
     }
 
@@ -172,32 +179,73 @@ public partial class Mob : Node3D
         {
             case States.IDLE:
                 currentState = newState;
-                mobMovement.chasingPlayer = false;
+                if (OnIdle != null)
+                {
+                    OnIdle();
+                }
                 break;
             case States.WAIT:
                 if (currentState != newState)
                 {
                     currentState = newState;
+
+                    if (OnWait != null)
+                    {
+                        OnWait();
+                    }
+
                     player.onHurt();
                     chaseTimer.Start();
-                    mobMovement.chasingPlayer = false;
                     GD.Print("Player touched!");
                 }
                 break;
             case States.CHASE:
                 currentState = newState;
-                if (player != null)
+
+                if (OnChase != null)
                 {
-                    mobMovement.chasingPlayer = true;
+                    OnChase();
                 }
                 break;
             case States.DEAD:
                 currentState = newState;
-                mobMovement.chasingPlayer = false;
+
+                OnMobFlavourDeath();
                 deathTimer.Start();
                 break;
         }
     }
+
+
+
+
+    // **************
+    //
+    //  MOVEMENT
+    // I HATE GODOT
+    //
+    // **************
+
+
+    private void ChasePlayer(double delta)
+    {
+        GD.Print("Chasing player at:" + player.GlobalPosition.ToString());
+
+        if (player == null)
+        {
+            return;
+        }
+
+        Vector3 direction = player.GlobalPosition - GlobalPosition;
+        direction.Y = 0;
+        direction = direction.Normalized();
+
+        GlobalPosition += direction * movementSpeed * (float)delta;
+
+
+    }
+
+
 
 
 
