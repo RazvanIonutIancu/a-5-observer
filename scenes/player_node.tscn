@@ -33,7 +33,7 @@ mesh = SubResource("CylinderMesh_0upji")
 shape = SubResource("CapsuleShape3D_cvrci")
 
 [node name="Camera3D" type="Camera3D" parent="Player"]
-transform = Transform3D(1, 0, 0, 0, 0.74966073, 0.66182226, 0, -0.66182226, 0.74966073, 0, 5.206789, 5.7341976)
+transform = Transform3D(1, 0, 0, 0, 0.74966073, 0.66182226, 0, -0.66182226, 0.74966073, 0, 7.820205, 8.694471)
 
 [node name="HPText" type="Label3D" parent="Player"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4462352, 0)

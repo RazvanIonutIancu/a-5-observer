@@ -1,8 +1,21 @@
 using Godot;
 using System;
+using System.Collections.Generic;
+using System.Security;
 
 public partial class Mob : Node3D
 {
+    // Delegates and observer types
+    public delegate void MobEvent(Mob mob);
+
+    public MobEvent OnIdle;
+    public MobEvent OnChase;
+    public MobEvent OnWait;
+    public MobEvent OnMobDeath;
+
+    public int mobPoolIndex;
+
+
 
     [Export]
     private Timer chaseTimer;
@@ -11,7 +24,7 @@ public partial class Mob : Node3D
     private Timer deathTimer;
 
     private Player player;
-    private CharacterBody3D mob;
+    //private CharacterBody3D mob;
 
 
     // NPC states
@@ -25,22 +38,77 @@ public partial class Mob : Node3D
 
     private States currentState;
 
-    private bool playerIsInChaseArea = false;
-    private bool isTouchingPlayer = false;
+    private bool playerIsInChaseArea;
+    private bool isTouchingPlayer;
 
-    private float movementSpeed = 3.0f;
+    private MobMovementLogic mobMovement;
 
 
 
     public override void _Ready()
     {
-        player = GetNode<Player>("../PlayerNode/Player");
+        player = GetNode<Player>("/root/Map/PlayerNode/Player");
+        mobMovement = GetNode<MobMovementLogic>("CharacterBody3D");
+    }
+
+    // ***************************
+    //
+    //  SPAWN LOGIC
+    //
+    // ***************************
+    public void SpawnMob()
+    {
+        float minSpawnDistance = 5f;
+        float maxSpawnDistance = 10f;
+
+        float distanceFromPlayer = (float)GD.RandRange(minSpawnDistance, maxSpawnDistance);
+        Vector3 spawnPosition;
+
+        // Now to check is spawnpoint is empty
+
+        while (true)
+        {
+            GD.Print("Trying to find position");
+            Vector3 directionFromPlayer = new Vector3((float)GD.RandRange(-1, 1), 0f, (float)GD.RandRange(-1, 1)).Normalized();
+
+            spawnPosition = player.GlobalPosition + distanceFromPlayer * directionFromPlayer;
+            spawnPosition.Y = 1f;
+
+            if (CheckCollisionAtPoint(spawnPosition))
+            {
+                GD.Print("Found position!");
+                break;
+            }
+        }
 
 
+        GlobalPosition = spawnPosition;
+
+
+        playerIsInChaseArea = false;
+        isTouchingPlayer = false;
         currentState = States.IDLE;
+    }
 
+    private bool CheckCollisionAtPoint(Vector3 point)
+    {
 
+        CollisionShape3D bodyCollisionShape = GetNode<CollisionShape3D>("../Mob/CharacterBody3D/Body/Area3D/CollisionShape3D");
+        Shape3D bodyShape = bodyCollisionShape.Shape;
+        Transform3D bodyTransform = bodyCollisionShape.Transform;
 
+        // Create query with the properties above
+        PhysicsShapeQueryParameters3D bodyQuery = new PhysicsShapeQueryParameters3D();
+        bodyQuery.Shape = bodyShape;
+        bodyQuery.Transform = new Transform3D(bodyCollisionShape.GlobalTransform.Basis, point);
+        bodyQuery.CollideWithBodies = true;
+        bodyQuery.CollideWithAreas = true;
+
+        // Check for collision
+        PhysicsDirectSpaceState3D currentSpaceState = GetWorld3D().DirectSpaceState;
+        Godot.Collections.Array<Godot.Collections.Dictionary> collisions = currentSpaceState.IntersectShape(bodyQuery, maxResults: 1);
+
+        return collisions.Count == 0;
     }
 
 
@@ -64,10 +132,6 @@ public partial class Mob : Node3D
                 {
                     SwitchState(States.WAIT);
                 }
-                else
-                {
-                    ChasePlayer(delta);
-                }
                 break;
             case States.WAIT:
                 if (chaseTimer.IsStopped())
@@ -78,7 +142,6 @@ public partial class Mob : Node3D
                     }
                     else
                     {
-                        GD.Print("Chasing after waiting");
                         SwitchState(States.IDLE);
                     }
                 }
@@ -86,23 +149,18 @@ public partial class Mob : Node3D
             case States.DEAD:
                 if (deathTimer.IsStopped())
                 {
-                    //  death logic
+                    if (OnMobDeath != null)
+                    {
+                        OnMobDeath(this);
+                    }
                 }
                 break;
 
         }
 
+        GD.Print(mobMovement.chasingPlayer.ToString());
 
     }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -114,6 +172,7 @@ public partial class Mob : Node3D
         {
             case States.IDLE:
                 currentState = newState;
+                mobMovement.chasingPlayer = false;
                 break;
             case States.WAIT:
                 if (currentState != newState)
@@ -121,71 +180,24 @@ public partial class Mob : Node3D
                     currentState = newState;
                     player.onHurt();
                     chaseTimer.Start();
+                    mobMovement.chasingPlayer = false;
                     GD.Print("Player touched!");
                 }
                 break;
             case States.CHASE:
                 currentState = newState;
+                if (player != null)
+                {
+                    mobMovement.chasingPlayer = true;
+                }
                 break;
             case States.DEAD:
                 currentState = newState;
+                mobMovement.chasingPlayer = false;
                 deathTimer.Start();
                 break;
         }
     }
-
-
-
-
-
-
-
-    // **************
-    //
-    //  BEHAVIOUR
-    //
-    // **************
-
-
-
-    private void ChasePlayer(double delta)
-    {
-        GD.Print("Chasing player at:" + player.GlobalPosition.ToString());
-
-        if (player == null)
-        { 
-            return;
-        }
-
-        Vector3 direction = player.GlobalPosition - GlobalPosition;
-        direction.Y = 0;
-        direction = direction.Normalized();
-
-        GlobalPosition += direction * movementSpeed * (float)delta;
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
