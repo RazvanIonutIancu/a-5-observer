@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|solutionrelative:scripts\\mob.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|c:\\users\\zacku\\documents\\godot projects\\a-5-observer\\scripts\\charactercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|solutionrelative:scripts\\charactercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|c:\\users\\zacku\\documents\\godot projects\\a-5-observer\\scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|solutionrelative:scripts\\player.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|c:\\users\\zacku\\documents\\godot projects\\a-5-observer\\scripts\\audioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|solutionrelative:scripts\\audioplayer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|c:\\users\\zacku\\documents\\godot projects\\a-5-observer\\scripts\\charactercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{3E5D37AA-6EBA-4B4C-B7B6-7A1B29A35B85}|A5_Observer.csproj|solutionrelative:scripts\\charactercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,7 +30,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "AudioPlayer.cs",
               "DocumentMoniker": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scripts\\AudioPlayer.cs",
               "RelativeDocumentMoniker": "scripts\\AudioPlayer.cs",
@@ -43,20 +43,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "Player.cs",
               "DocumentMoniker": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scripts\\Player.cs",
               "RelativeDocumentMoniker": "scripts\\Player.cs",
               "ToolTip": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scripts\\Player.cs",
               "RelativeToolTip": "scripts\\Player.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFIAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-09T15:35:52.963Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "CharacterController.cs",
               "DocumentMoniker": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scripts\\CharacterController.cs",
               "RelativeDocumentMoniker": "scripts\\CharacterController.cs",
@@ -75,7 +75,7 @@
               "RelativeDocumentMoniker": "scripts\\Mob.cs",
               "ToolTip": "C:\\Users\\Zacku\\Documents\\Godot Projects\\a-5-observer\\scripts\\Mob.cs",
               "RelativeToolTip": "scripts\\Mob.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACgAAAAFAAAAAAAAAA==",
+              "ViewState": "AgIAAMQAAAAAAAAAAAAcwO8AAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2026-03-09T15:10:29.994Z",
               "EditorCaption": ""

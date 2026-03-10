@@ -12,7 +12,7 @@ albedo_color = Color(0, 0.4745098, 0.3372549, 1)
 material = SubResource("StandardMaterial3D_rlwmu")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4are2"]
-radius = 0.31835938
+radius = 0.31884766
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bsing"]
 
@@ -158,8 +158,10 @@ _data = {
 &"RESET": SubResource("Animation_bsing")
 }
 
-[node name="Mob" type="Node3D"]
+[node name="Mob" type="Node3D" node_paths=PackedStringArray("chaseTimer", "deathTimer")]
 script = ExtResource("1_bsing")
+chaseTimer = NodePath("ChaseTimer")
+deathTimer = NodePath("DeathTimer")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1.989537, 0, 0, 0, 1, 0, 0, 0, 1.989537, 0, 0, 0)
@@ -204,7 +206,16 @@ libraries = {
 }
 autoplay = "Moving"
 
+[node name="ChaseTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
 [connection signal="body_entered" from="Area3D" to="." method="OnPlayerEnterArea"]
 [connection signal="body_exited" from="Area3D" to="." method="OnPlayerExitArea"]
 [connection signal="body_entered" from="CharacterBody3D/Body/Area3D" to="." method="OnPlayerHit"]
+[connection signal="body_exited" from="CharacterBody3D/Body/Area3D" to="." method="OnPlayerExitAfterHit"]
 [connection signal="body_entered" from="CharacterBody3D/Head/Area3D" to="." method="OnPlayerJumpOnHead"]

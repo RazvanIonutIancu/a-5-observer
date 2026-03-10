@@ -12,6 +12,34 @@ public partial class Player : CharacterBody3D
 
 
 
+	private int maxHP = 3;
+	private int currentHP;
+
+
+
+
+
+    public override void _Ready()
+    {
+		onHurt = TakeDamage;
+
+
+		currentHP = maxHP;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -81,7 +109,14 @@ public partial class Player : CharacterBody3D
 
 
 
+	private void TakeDamage()
+	{
+		currentHP -= 1;
 
+		// TODO end game if hp is 0
+
+
+	}
 
 
 
