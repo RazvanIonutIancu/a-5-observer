@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dvdyldx4e4tqi"]
+[gd_scene load_steps=18 format=3 uid="uid://dvdyldx4e4tqi"]
 
 [ext_resource type="Script" uid="uid://crcjlwrool7gx" path="res://scripts/Mob.cs" id="1_bsing"]
 [ext_resource type="Script" uid="uid://co1yaw8d7et7f" path="res://scripts/NpcAnimations.cs" id="2_bsing"]
@@ -11,6 +11,12 @@ material = SubResource("StandardMaterial3D_rlwmu")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_4are2"]
 radius = 0.31884766
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bsing"]
+albedo_color = Color(0.21230483, 0.21230483, 0.21230483, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d4cuo"]
+material = SubResource("StandardMaterial3D_bsing")
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_bsing"]
 
@@ -137,6 +143,10 @@ mesh = SubResource("CylinderMesh_4are2")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D/Body/Area3D"]
 transform = Transform3D(1.5782219, 0, 0, 0, 0.9727096, 0, 0, 0, 1.5782219, 0, 0, 0)
 shape = SubResource("CylinderShape3D_4are2")
+
+[node name="BodyDead" type="MeshInstance3D" parent="CharacterBody3D"]
+transform = Transform3D(1.5782219, 0, 0, 0, 0.13813996, 0, 0, 0, 1.5782219, 0, 0, 0)
+mesh = SubResource("CylinderMesh_d4cuo")
 
 [node name="BodyColl" type="CollisionShape3D" parent="CharacterBody3D"]
 transform = Transform3D(1.5782219, 0, 0, 0, 0.13813996, 0, 0, 0, 1.5782219, 0, 0, 0)

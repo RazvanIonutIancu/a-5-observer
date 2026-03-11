@@ -1,34 +1,52 @@
 using Godot;
 using System;
 
-
-public partial class AudioPlayer : AudioStreamPlayer
+public partial class AudioPlayer : Node
 {
-    [Export]
-    private Player player;
+    Player player;
+
+    public delegate void MobAudio();
+
+    public MobAudio onMobKill;
 
 
 
+	public override void _Ready()
+	{
+        player = GetNode<Player>("/root/Map/PlayerNode/Player");
 
+        player.onHurt += PlayHurt;
+        player.onHurt += PlayHit;
+        player.onJump += PlayJump;
 
-
-
-    public override void _Ready()
-    {
-        player.onJump += PlayJumpSound;
+        onMobKill += KillMob;
     }
 
 
 
 
-   
 
 
 
-    private void PlayJumpSound()
+
+	private void PlayHurt()
+	{
+		GetNode<AudioStreamPlayer>("PlayerHurtSound").Play();
+	}
+
+    private void PlayJump()
     {
-        GD.Print("Jump SOUND");
+        GetNode<AudioStreamPlayer>("PlayerJumpSound").Play();
     }
 
+    private void PlayHit()
+    {
+        GetNode<AudioStreamPlayer>("PlayerHitSound").Play();
+    }
+
+    private void KillMob()
+    {
+        GetNode<AudioStreamPlayer>("ClickSound").Play();
+    }
 
 }

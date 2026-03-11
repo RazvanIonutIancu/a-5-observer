@@ -27,7 +27,7 @@ public partial class Mob : Node3D
     private Timer deathTimer;
 
     private Player player;
-
+    private AudioPlayer audio;
 
 
     // NPC states
@@ -49,6 +49,7 @@ public partial class Mob : Node3D
     public override void _Ready()
     {
         player = GetNode<Player>("/root/Map/PlayerNode/Player");
+        audio = GetNode<AudioPlayer>("/root/Map/AudioController");
     }
 
     // ***************************
@@ -92,6 +93,10 @@ public partial class Mob : Node3D
         {
             OnIdle();
         }
+
+
+        GetNode<MeshInstance3D>("CharacterBody3D/BodyDead").Visible = false;
+        GetNode<MeshInstance3D>("CharacterBody3D/Body").Visible = true;
     }
 
     private bool CheckCollisionAtPoint(Vector3 point)
@@ -209,6 +214,8 @@ public partial class Mob : Node3D
                 break;
             case States.DEAD:
                 currentState = newState;
+                GetNode<MeshInstance3D>("CharacterBody3D/BodyDead").Visible = true;
+                GetNode<MeshInstance3D>("CharacterBody3D/Body").Visible = false;
 
                 OnMobFlavourDeath();
                 deathTimer.Start();
@@ -263,7 +270,7 @@ public partial class Mob : Node3D
     // Aggro area
     public void OnPlayerEnterArea(Node3D body)
     {
-        if (body == player && currentState != States.DEAD)
+        if (body == player && currentState != States.DEAD && currentState != States.WAIT)
         {
             GD.Print("Player entered follow area!");
             SwitchState(States.CHASE);
@@ -273,7 +280,7 @@ public partial class Mob : Node3D
 
     public void OnPlayerExitArea(Node3D body)
     {
-        if (body == player && currentState != States.DEAD)
+        if (body == player && currentState != States.DEAD && currentState != States.WAIT)
         {
             GD.Print("Player exited follow area!");
             SwitchState(States.IDLE);
@@ -306,6 +313,7 @@ public partial class Mob : Node3D
     {
         if (body == player && currentState != States.DEAD)
         {
+            audio.onMobKill();
             GD.Print("Player jumped on head!");
             SwitchState(States.DEAD);
         }
